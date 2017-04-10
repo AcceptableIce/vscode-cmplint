@@ -1,12 +1,12 @@
 {
-  "name": "stylelint",
-  "version": "0.24.0",
-  "displayName": "stylelint",
-  "description": "Modern CSS/SCSS/Less linter",
-  "publisher": "shinnn",
-  "repository": "https://github.com/shinnn/vscode-stylelint",
-  "homepage": "https://github.com/shinnn/vscode-stylelint#readme",
-  "bugs": "https://github.com/shinnn/vscode-stylelint/issues",
+  "name": "vscode-cmplint",
+  "version": "0.1.0",
+  "displayName": "vscode-cmplint",
+  "description": "Visual Studio Code plugin for cmplint. Based on vscode-stylelint.",
+  "publisher": "acceptableice",
+  "repository": "https://github.com/acceptableice/vscode-cmplint",
+  "homepage": "https://github.com/acceptableice/vscode-cmplint#readme",
+  "bugs": "https://github.com/acceptableice/vscode-cmplint/issues",
   "license": "MIT",
   "icon": "media/icon.svg",
   "galleryBanner": {
@@ -21,67 +21,53 @@
   ],
   "keywords": [
     "lint",
-    "style",
-    "stylelint",
-    "css",
+    "aura",
+    "cmp",
+    "cmplint",
     "check"
   ],
   "activationEvents": [
-    "onLanguage:css",
-    "onLanguage:less",
-    "onLanguage:postcss",
-    "onLanguage:scss"
+    "onLanguage:cmp",
+    "onLanguage:js"
   ],
   "main": "index.js",
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "stylelint configuration options",
+      "title": "cmplint configuration options",
       "properties": {
-        "stylelint.enable": {
+        "cmplint.enable": {
           "type": "boolean",
           "default": true,
-          "description": "Control whether stylelint is enabled for CSS/SCSS/Less files or not."
+          "description": "Control whether cmplint is enabled for Aura files or not."
         },
-        "stylelint.config": {
+        "cmplint.config": {
           "type": [
             "object",
             "null"
           ],
           "default": null,
-          "description": "A stylelint configuration object."
+          "description": "A cmplint configuration object."
         },
-        "stylelint.configOverrides": {
+        "cmplint.configOverrides": {
           "type": [
             "object",
             "null"
           ],
           "default": null,
-          "description": "A partial stylelint config whose properties override the existing ones."
+          "description": "A partial cmplint config whose properties override the existing ones."
         }
       }
-    },
-    "jsonValidation": [
-      {
-        "fileMatch": "**/.stylelintrc*",
-        "url": "http://json.schemastore.org/stylelintrc.json"
-      }
-    ]
+    }
   },
   "scripts": {
-    "test": "eslint --fix --format=codeframe index.js server.js"
+    "test": "cmplint --fix --format=codeframe index.js server.js",
+    "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "dependencies": {
-    "stylelint-vscode": "^5.2.3",
+    "cmplint": "git@github.com:AcceptableIce/cmplint.git",
+    "vscode": "^1.1.0",
     "vscode-languageclient": "^3.2.0",
     "vscode-languageserver": "^3.2.0"
-  },
-  "devDependencies": {
-    "@shinnn/eslint-config-node": "^3.0.0",
-    "eslint": "^3.19.0",
-    "vscode": "^1.1.0"
-  },
-  "eslintConfig": {
-    "extends": "@shinnn/node"
   }
 }
