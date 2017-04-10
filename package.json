@@ -1,7 +1,7 @@
 {
-  "name": "vscode-cmplint",
+  "name": "cmplint",
   "version": "0.1.0",
-  "displayName": "vscode-cmplint",
+  "displayName": "cmplint",
   "description": "Visual Studio Code plugin for cmplint. Based on vscode-stylelint.",
   "publisher": "acceptableice",
   "repository": "https://github.com/acceptableice/vscode-cmplint",
@@ -27,8 +27,7 @@
     "check"
   ],
   "activationEvents": [
-    "onLanguage:cmp",
-    "onLanguage:js"
+    "*"
   ],
   "main": "index.js",
   "contributes": {
@@ -58,14 +57,21 @@
           "description": "A partial cmplint config whose properties override the existing ones."
         }
       }
-    }
+    },
+    "languages": [
+      {
+        "id": "component",
+        "aliases": ["aura-component"],
+        "extensions": [".cmp"]
+      }
+    ]
   },
   "scripts": {
     "test": "cmplint --fix --format=codeframe index.js server.js",
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "dependencies": {
-    "cmplint": "git@github.com:AcceptableIce/cmplint.git",
+    "vscode-cmplint-server": "git@github.com:AcceptableIce/vscode-cmplint-server.git",
     "vscode": "^1.1.0",
     "vscode-languageclient": "^3.2.0",
     "vscode-languageserver": "^3.2.0"

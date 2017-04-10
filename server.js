@@ -2,7 +2,7 @@
 
 const langServer = require("vscode-languageserver");
 const Files = langServer.Files;
-const cmplintServerWrapper = require("./cmplintServerWrapper");
+const cmplintServerWrapper = require("vscode-cmplint-server");
 const path = require("path");
 
 let config;
@@ -15,17 +15,16 @@ const supportedCustomSyntaxes = new Set(["cmp", "js"]);
 
 function validate(document) {
 	const options = {
-		code: document.getText()
+		code: document.getText(),
+		formatter: "raw",
+		filter: "<source>"
 	};
 
 	const filePath = Files.uriToFilePath(document.uri);
 
-	options.directory = path.join(filePath, "..");
-	options.filter = filePath;
+	if(!filePath) return;
 
-	if(filePath) {
-		options.codeFilename = filePath;
-	}
+	options.sourceDirectory = path.join(filePath, "..");
 
 	if(config) {
 		options.config = config;
@@ -34,6 +33,7 @@ function validate(document) {
 	if(configOverrides) {
 		options.configOverrides = configOverrides;
 	}
+
 
 	if(supportedCustomSyntaxes.has(document.languageId)) {
 		options.syntax = document.languageId;
@@ -45,9 +45,10 @@ function validate(document) {
 			diagnostics
 		});
 	}).catch(err => {
+		connection.console.log(err.message);
 		if(err.reasons) {
 			err.reasons.forEach(reason => connection.window.showErrorMessage("cmplint: " + reason));
-			
+
 			return;
 		}
 		connection.window.showErrorMessage(err.stack.replace(/\n/g, " "));
@@ -70,18 +71,20 @@ connection.onInitialize(() => {
 connection.onDidChangeConfiguration(params => {
 	const { settings } = params;
 
-	config = settings.stylelint.config;
-	configOverrides = settings.stylelint.configOverrides;
+	config = settings.cmplint.config;
+	configOverrides = settings.cmplint.configOverrides;
 
 	validateAll();
 });
 connection.onDidChangeWatchedFiles(() => validateAll());
 
-documents.onDidChangeContent(event => validate(event.document));
+documents.onDidChangeContent(event => 	validate(event.document));
+
 documents.onDidClose(event => connection.sendDiagnostics({
 	uri: event.document.uri,
 	diagnostics: []
 }));
+
 documents.listen(connection);
 
 connection.listen();
