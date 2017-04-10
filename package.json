@@ -8,7 +8,7 @@
   "homepage": "https://github.com/acceptableice/vscode-cmplint#readme",
   "bugs": "https://github.com/acceptableice/vscode-cmplint/issues",
   "license": "MIT",
-  "icon": "media/icon.svg",
+  "icon": "media/logo.png",
   "galleryBanner": {
     "color": "#32CD32",
     "theme": "light"
@@ -47,14 +47,6 @@
           ],
           "default": null,
           "description": "A cmplint configuration object."
-        },
-        "cmplint.configOverrides": {
-          "type": [
-            "object",
-            "null"
-          ],
-          "default": null,
-          "description": "A partial cmplint config whose properties override the existing ones."
         }
       }
     },
