@@ -11,8 +11,6 @@ let configOverrides;
 const connection = langServer.createConnection(process.stdin, process.stdout);
 const documents = new langServer.TextDocuments();
 
-const supportedCustomSyntaxes = new Set(["cmp", "js"]);
-
 function validate(document) {
 	const options = {
 		code: document.getText(),
@@ -22,7 +20,7 @@ function validate(document) {
 
 	const filePath = Files.uriToFilePath(document.uri);
 
-	if(!filePath) return;
+	if(!filePath) return undefined;
 
 	options.sourceDirectory = path.join(filePath, "..");
 
@@ -34,18 +32,12 @@ function validate(document) {
 		options.configOverrides = configOverrides;
 	}
 
-
-	if(supportedCustomSyntaxes.has(document.languageId)) {
-		options.syntax = document.languageId;
-	}
-
 	return cmplintServerWrapper(options).then(diagnostics => {
 		connection.sendDiagnostics({
 			uri: document.uri,
 			diagnostics
 		});
 	}).catch(err => {
-		connection.console.log(err.message);
 		if(err.reasons) {
 			err.reasons.forEach(reason => connection.window.showErrorMessage("cmplint: " + reason));
 
@@ -78,7 +70,7 @@ connection.onDidChangeConfiguration(params => {
 });
 connection.onDidChangeWatchedFiles(() => validateAll());
 
-documents.onDidChangeContent(event => 	validate(event.document));
+documents.onDidChangeContent(event => validate(event.document));
 
 documents.onDidClose(event => connection.sendDiagnostics({
 	uri: event.document.uri,

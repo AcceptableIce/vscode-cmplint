@@ -24,7 +24,7 @@ exports.activate = context => {
 			}
 		},
 		{
-			documentSelector: ["component", "javascript"],
+			documentSelector: ["component"],
 			synchronize: {
 				configurationSection: "cmplint",
 				fileEvents: vscode.workspace.createFileSystemWatcher("**/{.cmplintrc,cmplint.config.js}")

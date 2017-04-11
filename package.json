@@ -1,7 +1,7 @@
 {
-  "name": "cmplint",
-  "version": "0.1.0",
-  "displayName": "cmplint",
+  "name": "vscode-cmplint",
+  "version": "0.1.2",
+  "displayName": "vscode-cmplint",
   "description": "Visual Studio Code plugin for cmplint. Based on vscode-stylelint.",
   "publisher": "acceptableice",
   "repository": "https://github.com/acceptableice/vscode-cmplint",
