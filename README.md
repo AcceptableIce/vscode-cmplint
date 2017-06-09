@@ -1,6 +1,6 @@
 # vscode-cmplint
 
-A [Visual Studio Code](https://code.visualstudio.com/) extension to lint [Aura](http://auraframework.org/) component files with [cmplint](http://github.com/acceptableice/cmplint).
+A [Visual Studio Code](https://code.visualstudio.com/) extension to lint [Aura](http://auraframework.org/) component files with [cmplint](http://github.com/Corvimae/cmplint).
 
 ## Usage
 
@@ -32,7 +32,7 @@ Will be directly passed as the `config` option. Note that if you set `config` op
 
 ## License
 
-Copyright 2017 [Jake Roussel](https://github.com/acceptableice).
+Copyright 2017 [May Roussel](https://github.com/Corvimae).
 
 Heavily based off [Shinnosuke Watanabe](https://github.com/shinnn)'s [vscode-stylelint](https://github.com/shinnn/vscode-stylelint).
 

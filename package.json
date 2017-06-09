@@ -3,10 +3,10 @@
   "version": "0.1.3",
   "displayName": "vscode-cmplint",
   "description": "Visual Studio Code plugin for cmplint. Based on vscode-stylelint.",
-  "publisher": "acceptableice",
-  "repository": "https://github.com/acceptableice/vscode-cmplint",
-  "homepage": "https://github.com/acceptableice/vscode-cmplint#readme",
-  "bugs": "https://github.com/acceptableice/vscode-cmplint/issues",
+  "publisher": "Corvimae",
+  "repository": "https://github.com/Corvimae/vscode-cmplint",
+  "homepage": "https://github.com/Corvimae/vscode-cmplint#readme",
+  "bugs": "https://github.com/Corvimae/vscode-cmplint/issues",
   "license": "MIT",
   "icon": "media/logo.png",
   "galleryBanner": {
@@ -63,7 +63,7 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "dependencies": {
-    "vscode-cmplint-server": "git@github.com:AcceptableIce/vscode-cmplint-server.git",
+    "vscode-cmplint-server": "git@github.com:Corvimae/vscode-cmplint-server.git",
     "vscode": "^1.1.0",
     "vscode-languageclient": "^3.2.0",
     "vscode-languageserver": "^3.2.0"
